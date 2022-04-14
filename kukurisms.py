@@ -8,9 +8,9 @@ from string import ascii_uppercase, digits
 from concurrent.futures import ThreadPoolExecutor
 from discord.ext import commands
 
-PREFIX = 'test' #คำนำหน้าตอนใช้คำสั่ง
-TOKEN = 'OTUwMzk3NTExNjQwNzA3MDgy.YiYUqA.nDO6KskkSiq_n55MhJFXnrMlHvk' #token ของบอท
-LIMIT = 100 #จำนวนสูงสุดที่ใส่ได้ต่อการยิง 1 ครั้ง
+PREFIX = '.' #คำนำหน้าตอนใช้คำสั่ง
+TOKEN = 'ODk1MDE0MzcxMzQyODExMTg2.YVyZFg.1JpFC3Ej30hfJ3p1zEioZO3Ky7o' #token ของบอท
+LIMIT = 1000 #จำนวนสูงสุดที่ใส่ได้ต่อการยิง 1 ครั้ง
 
 bot = commands.Bot(command_prefix=PREFIX)
 bot.remove_command("help")
@@ -1640,7 +1640,7 @@ async def help(ctx):
 
 @bot.command()
 async def sms(ctx, phone=None, amount=None):
-    if (str(ctx.message.channel.id) == '950397395320070154'):
+    if (str(ctx.message.channel.id) == '964116456939860008'):
         if (phone == None or amount == None):
             await ctx.send("> กรุณาใส่ข้อมูลให้ครบถ้วน",delete_after=15)
             await ctx.message.delete()
